@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  api-gateway.conf: |
+    server {
+        listen 5010 ssl;
+
+        server_name evention.local;
+
+        ssl_certificate /etc/nginx/certs/tls.crt;
+        ssl_certificate_key /etc/nginx/certs/tls.key;
+
+        location /user/ {
+            limit_req zone=mylimit burst=5 nodelay;
+            proxy_pass https://userservice.default.svc.cluster.local:5001/;
+        }
+
+        location /event/ {
+            limit_req zone=mylimit burst=5 nodelay;
+            proxy_pass https://eventservice.default.svc.cluster.local:5002/;
+        }
+
+        location /userinevent/ {
+            limit_req zone=mylimit burst=5 nodelay;
+            proxy_pass https://userineventservice.default.svc.cluster.local:5003/;
+        }
+
+        location /payment/ {
+            limit_req zone=mylimit burst=5 nodelay;
+            proxy_pass https://paymentservice.default.svc.cluster.local:5004/;
+        }
+
+        location /location/ {
+            limit_req zone=mylimit burst=5 nodelay;
+            proxy_pass https://locationservice.default.svc.cluster.local:5005/;
+        }
+    }
+

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-main-config
+data:
+  nginx.conf: |
+    events { 
+        worker_connections 1024; 
+    }
+
+    http {
+        limit_req_zone $binary_remote_addr zone=mylimit:10m rate=3r/s;
+
+        include /etc/nginx/conf.d/*.conf;
+    }
