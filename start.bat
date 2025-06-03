@@ -27,6 +27,7 @@ kubectl apply -f nginx\nginx-configmap.yaml
 kubectl apply -f nginx\nginx-deployment.yaml
 kubectl apply -f nginx\nginx-service.yaml
 
+kubectl apply -f services\eventservice-images-storage.yaml
 kubectl apply -f services\eventservice-deployment.yaml
 kubectl apply -f services\eventservice-service.yaml
 
@@ -39,6 +40,7 @@ kubectl apply -f services\paymentservice-service.yaml
 kubectl apply -f services\usereventservice-deployment.yaml
 kubectl apply -f services\usereventservice-service.yaml
 
+kubectl apply -f services\userservice-images-storage.yaml
 kubectl apply -f services\userservice-deployment.yaml
 kubectl apply -f services\userservice-service.yaml
 
