@@ -12,6 +12,13 @@ spec:
       labels:
         app: paymentservice
     spec:
+      initContainers:
+        - name: wait-for-redis
+          image: busybox
+          command:
+            - sh
+            - -c
+            - until nc -z userservice-redis-service 6379; do echo "Esperando pelo Redis..."; sleep 2; done;    
       containers:
       - name: paymentservice
         image: a23893/paymentservice:latest
