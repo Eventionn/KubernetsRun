@@ -23,6 +23,12 @@ kubectl apply -f databases\postgres-deployment-pay.yaml
 kubectl apply -f databases\redis-storage.yaml
 kubectl apply -f databases\redis-deployment.yaml
 
+echo.
+echo Criando Secret TLS do NGINX...
+kubectl create secret tls nginx-tls-secret --cert=nginx/tls.crt --key=nginx/tls.key --dry-run=client -o yaml | kubectl apply -f -
+
+echo.
+echo Aplicando configuracoes do NGINX...
 kubectl apply -f nginx\nginx-configmap.yaml
 kubectl apply -f nginx\nginx-deployment.yaml
 kubectl apply -f nginx\nginx-service.yaml
