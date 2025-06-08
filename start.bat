@@ -59,6 +59,7 @@ kubectl create secret tls nginx-tls-secret --cert=nginx/tls.crt --key=nginx/tls.
 
 echo.
 echo Aplicando configuracoes do NGINX...
+kubectl apply -f nginx\nginx-main-config.yaml
 kubectl apply -f nginx\nginx-configmap.yaml
 kubectl apply -f nginx\nginx-deployment.yaml
 kubectl apply -f nginx\nginx-service.yaml
